@@ -2,21 +2,21 @@
 <br/>
 <br/>
 <p align="center">
-  <a href="https://github.com/shaojintian/Best_README_template/">
-    <img src="image/logo.png" alt="Logo" width="80" height="80">
-  </a>
-</p>
+    < img src="image/logo.png" alt="Logo" width="80" height="80">
+</p >
 
 <h3 align="center">AM40-LED-Control</h3>
 <p align="center">
     快捷控制 SMART AM40 设备电源灯光的 Web 程序
-</p>
+</p >
 
 ## 系统要求
 
 本程序已在 Armbian_23.02.2_am40_jammy_current_6.1.11.img 系统镜像上通过测试 其他 Linux 系统还未做测试 可自行尝试安装
 
-![](image/am40.png)
+<p align="center">
+    < img src="image/am40.png" alt="Logo" width="380">
+</p >
 
 ![](image/Demo.png)
 
@@ -84,4 +84,3 @@ http://<设备IP>:5000
 ### 打赏作者
 
 ![](image/pay.png)
-
