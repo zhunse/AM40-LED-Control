@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AM40灯光控制</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        :root {
+            --primary-color: #4361ee;
+            --success-color: #4cc9f0;
+            --toggle-size-pc: 150px;
+            --toggle-size-mobile: 150px;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+            min-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            width: 50%;
+            background: white;
+            border-radius: 15px;
+            padding: 30px 30px 100px 30px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0px 0px 25px #80808015;
+        }
+
+        h1 {
+            margin: 0 0 30px 0;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.8rem;
+            align-self: flex-start;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+        .status-indicator {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ccc;
+        }
+
+        .status.on .status-indicator {
+            background: var(--success-color);
+            box-shadow: 0 0 12px var(--success-color);
+        }
+
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 35px;
+        }
+
+        .toggle-btn {
+            width: var(--toggle-size-pc);
+            height: var(--toggle-size-pc);
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .toggle-btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .toggle-btn:active {
+            transform: scale(0.98);
+        }
+
+        .mode-select {
+            width: 100%;
+            max-width: 220px;
+            padding: 14px 30px 14px 14px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            background: white;
+            margin: 0 auto;
+            display: block;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234361ee' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                width: 100%;
+                background: none;
+                border: none;
+                padding: 10px;
+                box-shadow: none;
+            }
+
+            .toggle-btn {
+                width: var(--toggle-size-mobile);
+                height: var(--toggle-size-mobile);
+                font-size: 1.1rem;
+            }
+
+            h1 {
+                width: 100%;
+                font-size: 1.6rem;
+                text-align: center;
+                margin: 0 0 150px 0;
+            }
+
+            .status {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <h1>AM40灯光控制</h1>
+        <div class="status" id="status">
+            <div class="status-indicator"></div>
+            <span>加载中...</span>
+        </div>
+
+        <div class="toggle-container">
+            <button class="toggle-btn" id="toggleBtn">开关</button>
+        </div>
+
+        <select class="mode-select" id="modeSelect">
+            <option value="none">手动模式</option>
+            <option value="heartbeat">心跳模式</option>
+        </select>
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById('toggleBtn');
+        const modeSelect = document.getElementById('modeSelect');
+        const statusDisplay = document.getElementById('status');
+
+        // 获取当前状态
+        function updateStatus() {
+            fetch('/status')
+                .then(response => response.json())
+                .then(data => {
+                    const isOn = data.on;
+                    statusDisplay.innerHTML = `
+                        <div class="status-indicator"></div>
+                        <span>状态: ${isOn ? '开启' : '关闭'}</span>
+                    `;
+                    statusDisplay.classList.toggle('on', isOn);
+                    toggleBtn.textContent = isOn ? '关闭' : '开启';
+                    toggleBtn.style.background = isOn ? 'var(--success-color)' : 'var(--primary-color)';
+                });
+        }
+
+        // 切换开关
+        toggleBtn.addEventListener('click', () => {
+            fetch('/toggle', { method: 'POST' })
+                .then(updateStatus);
+        });
+
+        // 切换模式
+        modeSelect.addEventListener('change', (e) => {
+            fetch('/set_mode', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mode: e.target.value })
+            }).then(updateStatus);
+        });
+
+        // 初始加载
+        updateStatus();
+    </script>
+</body>
+
+</html>
