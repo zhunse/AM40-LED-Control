@@ -18,7 +18,7 @@
     <img src="image/am40.png" alt="Logo" width="380">
 </p>
 
-![](image/Demo.png)
+![](image/Demos.png)
 
 ## 安装步骤
 
