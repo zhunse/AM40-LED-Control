@@ -10,47 +10,49 @@
     快捷控制 SMART AM40 设备电源灯光的 Web 程序
 </p>
 
-## 系统要求
+## 界面预览
 
-本程序已在 Armbian_23.02.2_am40_jammy_current_6.1.11.img 系统镜像上通过测试 其他 Linux 系统还未做测试 可自行尝试安装
+![](image/Demose.png)
+
+## 适用系统
 
 <p align="center">
     <img src="image/am40.png" alt="Logo" width="380">
 </p>
 
-![](image/Demos.png)
+<p align="center">本程序目前只在 Armbian_23.02.2_am40_jammy_current_6.1.11.img 系统镜像上通过测试 其他 Linux 系统还未做测试 可自行尝试安装</p>
 
 ## 安装步骤
 
-### 1. 下载安装包到临时目录
+#### 1. 下载安装包到临时目录
 ```bash
 curl -o /tmp/am40-led-control.tar https://github.com/zhunse/AM40-LED-Control/releases/download/V1.0/am40-led-control.tar
 ```
 
-### 2. 解压安装包
+#### 2. 解压安装包
 ```bash
 tar -xvf /tmp/am40-led-control.tar -C /tmp/
 ```
-### 3. 进入解压目录
+#### 3. 进入解压目录
 ```bash
 cd /tmp/am40-led-control
 ```
 
-### 4. 添加执行权限
+#### 4. 添加执行权限
 ```bash
 chmod +x install.sh
 ```
 
-### 5. 运行安装脚本（需要root权限）
+#### 5. 运行安装脚本（需要root权限）
 ```bash
 sudo ./install.sh
 ```
-### 6. 安装完成后可删除临时文件（可选）
+#### 6. 安装完成后可删除临时文件（可选）
 ```bash
 rm -rf /tmp/am40-led-control*
 ```
 
-### 补充说明
+## 补充说明
 
 #### 为什么做这个程序？
 
@@ -81,6 +83,6 @@ led-control help        # 显示帮助
 http://<设备IP>:5000
 ```
 
-### 打赏作者
+## 打赏作者
 
 ![](image/pay.png)
