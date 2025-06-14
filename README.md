@@ -12,7 +12,7 @@
 
 ## 界面预览
 
-![](image/Demose.png)
+![](image/Demoa.png)
 
 ## 适用系统
 
