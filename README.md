@@ -83,6 +83,6 @@ led-control help        # 显示帮助
 http://<设备IP>:5000
 ```
 
-## 打赏作者
+## 赞赏支持
 
 ![](image/pay.png)
