@@ -84,7 +84,7 @@ http://<设备IP>:5000
 ```
 ## 获取帮助
 
-![](image/vxz.png)
+![](image/wxz.png)
 
 ## 赞赏支持
 
