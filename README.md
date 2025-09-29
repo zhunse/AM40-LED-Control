@@ -28,6 +28,10 @@
 ```bash
 curl -o /tmp/am40-led-control.tar https://github.com/zhunse/AM40-LED-Control/releases/download/V1.0/am40-led-control.tar
 ```
+> 国内如遇到下载缓慢或者无法下载可使用以下链接
+> ```
+> curl -o /tmp/am40-led-control.tar https://proxy.pipers.cn/https://github.com/zhunse/AM40-LED-Control/releases/download/V1.0/am40-led-control.tar
+> ```
 
 #### 2. 解压安装包
 ```bash
